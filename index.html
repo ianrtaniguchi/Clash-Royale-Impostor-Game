@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Clash Impostor</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="screen-login" class="screen active">
+      <h1>Clash Impostor</h1>
+      <p>Digite seu nome e uma sala para jogar com amigos.</p>
+
+      <input type="text" id="input-name" placeholder="Seu Nome (ex: Ian)" />
+      <input
+        type="number"
+        id="input-room"
+        placeholder="ID da Sala (ex: 1234)"
+      />
+
+      <button class="btn-green" onclick="joinRoom()">ENTRAR NA SALA</button>
+    </div>
+
+    <div id="screen-lobby" class="screen">
+      <h1>Sala: <span id="lobby-room-id">...</span></h1>
+      <p>Jogadores Conectados:</p>
+      <ul id="player-list">
+        <li>Aguardando...</li>
+      </ul>
+      <br />
+      <button class="btn-blue" onclick="startGame()">SORTEAR CARTA</button>
+      <button
+        class="btn-red"
+        style="margin-top: 20px; font-size: 0.9rem"
+        onclick="leaveRoom()"
+      >
+        Sair
+      </button>
+    </div>
+
+    <div id="screen-game" class="screen">
+      <h2 id="role-display">...</h2>
+      <p id="instruction-text">...</p>
+
+      <div id="card-container" class="card-box">
+        <img id="card-image" class="card-img" src="" alt="Carta" />
+        <h1 id="card-name">...</h1>
+        <p id="card-hint" style="font-style: italic; color: #f1c40f">...</p>
+      </div>
+
+      <button class="btn-blue" style="margin-top: 30px" onclick="startGame()">
+        PRÓXIMA RODADA
+      </button>
+      <button
+        class="btn-red"
+        style="margin-top: 10px; font-size: 0.9rem"
+        onclick="leaveRoom()"
+      >
+        Sair da Sala
+      </button>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyB6p7OSeA19GyE1lypGTfWe-_Otbt2b0f8",
+        authDomain: "mechanical-tower-defense.firebaseapp.com",
+        databaseURL:
+          "https://mechanical-tower-defense-default-rtdb.firebaseio.com",
+        storageBucket: "mechanical-tower-defense.appspot.com",
+      };
+
+      if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+      }
+      const db = firebase.database();
+
+      let CARDS_DB = [];
+      let myName = "";
+      let myRoom = "";
+      let myId = "";
+      let roomRef = null;
+
+      function loadCards() {
+        db.ref("impostor_rooms/cards")
+          .once("value")
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              const data = snapshot.val();
+              CARDS_DB = Object.values(data);
+              console.log("Cartas carregadas:", CARDS_DB.length);
+            } else {
+              console.error("DB Vazior.");
+              alert("Erro no DB.");
+            }
+          })
+          .catch((err) => {
+            console.error("Erro ao carregar cartas:", err);
+          });
+      }
+
+      loadCards();
+
+      function showScreen(screenId) {
+        document
+          .querySelectorAll(".screen")
+          .forEach((el) => el.classList.remove("active"));
+        document.getElementById(screenId).classList.add("active");
+      }
+
+      function joinRoom() {
+        const nameInput = document.getElementById("input-name").value.trim();
+        const roomInput = document.getElementById("input-room").value.trim();
+
+        if (!nameInput || !roomInput) {
+          alert("Por favor, digite seu nome e o número da sala!");
+          return;
+        }
+
+        if (CARDS_DB.length === 0) {
+          alert("As cartas ainda não carregaram ou o banco está vazio.");
+          loadCards();
+          return;
+        }
+
+        myName = nameInput;
+        myRoom = roomInput;
+        myId = myName + "_" + Date.now();
+        roomRef = db.ref("impostor_rooms/" + myRoom);
+
+        roomRef
+          .child("players/" + myId)
+          .set(myName)
+          .then(() => {
+            startListening();
+          })
+          .catch((error) => {
+            alert("Erro ao conectar: " + error.message);
+          });
+      }
+
+      function startListening() {
+        roomRef.on("value", (snapshot) => {
+          const data = snapshot.val();
+          if (!data) return;
+
+          if (data.players) {
+            const list = document.getElementById("player-list");
+            list.innerHTML = "";
+            Object.values(data.players).forEach((pName) => {
+              const li = document.createElement("li");
+              li.textContent = pName;
+              if (pName === myName) li.style.fontWeight = "bold";
+              list.appendChild(li);
+            });
+          }
+
+          const state = data.state || "LOBBY";
+          document.getElementById("lobby-room-id").textContent = myRoom;
+
+          if (state === "LOBBY") {
+            showScreen("screen-lobby");
+            document.body.style.backgroundColor = "#1a1a1d";
+          } else if (state === "REVEAL") {
+            showScreen("screen-game");
+            updateGameScreen(data);
+          }
+        });
+      }
+
+      function startGame() {
+        roomRef
+          .child("players")
+          .get()
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              const playersObj = snapshot.val();
+              const playerIds = Object.keys(playersObj);
+
+              if (playerIds.length < 3) {
+                alert("Precisa de pelo menos 3 jogadores!");
+                // return
+              }
+
+              const impostorId =
+                playerIds[Math.floor(Math.random() * playerIds.length)];
+              const cardIndex = Math.floor(Math.random() * CARDS_DB.length);
+
+              roomRef.update({
+                state: "REVEAL",
+                impostor_id: impostorId,
+                current_card_index: cardIndex,
+                timestamp: Date.now(),
+              });
+            }
+          });
+      }
+
+      function updateGameScreen(data) {
+        if (!CARDS_DB[data.current_card_index]) return;
+
+        const cardInfo = CARDS_DB[data.current_card_index];
+        const isImpostor = data.impostor_id === myId;
+
+        const roleDisplay = document.getElementById("role-display");
+        const instructText = document.getElementById("instruction-text");
+        const cardName = document.getElementById("card-name");
+        const cardHint = document.getElementById("card-hint");
+        const cardImg = document.getElementById("card-image");
+        const container = document.getElementById("card-container");
+
+        if (cardInfo.image && cardInfo.image.trim() !== "") {
+          cardImg.src = cardInfo.image;
+          cardImg.style.display = "block";
+        } else {
+          cardImg.style.display = "none";
+          cardImg.src = "";
+        }
+
+        if (isImpostor) {
+          document.body.style.backgroundColor = "#521111";
+          roleDisplay.textContent = "VOCÊ É O IMPOSTOR!";
+          roleDisplay.className = "role-impostor";
+          instructText.textContent = "Finja que sabe qual é a carta.";
+
+          cardName.textContent = "???";
+          cardHint.textContent = `Dica: ${cardInfo.hint}`;
+
+          cardImg.style.display = "none";
+
+          container.style.borderColor = "#f1c40f";
+          container.style.backgroundColor = "#2c3e50";
+        } else {
+          document.body.style.backgroundColor = "#112252";
+          roleDisplay.textContent = "VOCÊ NÃO É O IMPOSTOR!";
+          roleDisplay.className = "role-crew";
+          instructText.textContent = "Descubra quem não sabe a carta!";
+
+          cardName.textContent = cardInfo.name;
+          cardHint.textContent = "";
+          container.style.backgroundColor = cardInfo.color;
+          container.style.borderColor = "white";
+        }
+      }
+
+      function leaveRoom() {
+        if (myId && roomRef) {
+          roomRef.child("players/" + myId).remove();
+          roomRef.off();
+        }
+        location.reload();
+      }
+    </script>
+  </body>
+</html>

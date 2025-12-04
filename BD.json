@@ -1,0 +1,724 @@
+{
+  "impostor_rooms": {
+    "1234": {
+      "current_card_index": 39,
+      "impostor_id": "ian_1764807816",
+      "players": {
+        "gava_1764808281": "gava",
+        "ian_1764807816": "ian",
+        "ian_1764808273522": "ian",
+        "ian_1764809597": "ian"
+      },
+      "state": "REVEAL",
+      "timestamp": 1764809615.5426254
+    },
+    "cards": [
+      {
+        "color": "rgb(50, 50, 150)",
+        "hint": "7 de elixir, tanque, dano altíssimo",
+        "image": "https://statsroyale.com/images/cards/full/pekka.png",
+        "name": "P.E.K.K.A"
+      },
+      {
+        "color": "rgb(200, 200, 200)",
+        "hint": "12 esqueletos",
+        "image": "",
+        "name": "Exército de Esqueletos"
+      },
+      {
+        "color": "rgb(50, 200, 50)",
+        "hint": "Voador, fogo em área",
+        "image": "",
+        "name": "Bebê Dragão"
+      },
+      {
+        "color": "rgb(150, 100, 50)",
+        "hint": "Viaja por baixo da terra",
+        "image": "",
+        "name": "Mineiro"
+      },
+      {
+        "color": "rgb(255, 150, 50)",
+        "hint": "Alcance gigante, flechas de fogo",
+        "image": "",
+        "name": "Princesa"
+      },
+      {
+        "color": "rgb(200, 100, 100)",
+        "hint": "Direto na torre",
+        "image": "https://statsroyale.com/images/cards/full/hog_rider.png",
+        "name": "Corredor"
+      },
+      {
+        "color": "rgb(100, 100, 100)",
+        "hint": "Tanque de pedra, divide em golemitas",
+        "image": "",
+        "name": "Golem"
+      },
+      {
+        "color": "rgb(50, 255, 50)",
+        "hint": "Voa e cai 3 goblins",
+        "image": "",
+        "name": "Barril de Goblins"
+      },
+      {
+        "color": "rgb(255, 255, 0)",
+        "hint": "Tiro carregado destrutivo",
+        "image": "",
+        "name": "Sparky"
+      },
+      {
+        "color": "rgb(160, 120, 80)",
+        "hint": "Barato, resistente",
+        "image": "",
+        "name": "Cavaleiro"
+      },
+      {
+        "color": "rgb(255, 150, 200)",
+        "hint": "Duas, alcance alto",
+        "image": "",
+        "name": "Arqueiras"
+      },
+      {
+        "color": "rgb(200, 150, 80)",
+        "hint": "Foca construções",
+        "image": "",
+        "name": "Gigante"
+      },
+      {
+        "color": "rgb(220, 160, 100)",
+        "hint": "Atira de longe nas torres",
+        "image": "",
+        "name": "Gigante Real"
+      },
+      {
+        "color": "rgb(80, 80, 200)",
+        "hint": "Pancada forte, 'PAN!'",
+        "image": "",
+        "name": "Mini P.E.K.K.A"
+      },
+      {
+        "color": "rgb(150, 150, 255)",
+        "hint": "Alcance alto, dano forte",
+        "image": "",
+        "name": "Mosqueteira"
+      },
+      {
+        "color": "rgb(255, 120, 120)",
+        "hint": "Gira e limpa área",
+        "image": "",
+        "name": "Valquíria"
+      },
+      {
+        "color": "rgb(100, 100, 60)",
+        "hint": "Bomba gigante ao morrer",
+        "image": "",
+        "name": "Gigante Esqueleto"
+      },
+      {
+        "color": "rgb(250, 200, 150)",
+        "hint": "Carga dobrada",
+        "image": "",
+        "name": "Príncipe"
+      },
+      {
+        "color": "rgb(50, 50, 80)",
+        "hint": "Carga + escudo",
+        "image": "",
+        "name": "Príncipe das Trevas"
+      },
+      {
+        "color": "rgb(255, 100, 100)",
+        "hint": "Fogo em área",
+        "image": "",
+        "name": "Mago"
+      },
+      {
+        "color": "rgb(120, 200, 255)",
+        "hint": "Congela ataques",
+        "image": "",
+        "name": "Mago de Gelo"
+      },
+      {
+        "color": "rgb(100, 150, 255)",
+        "hint": "Reinicia alvos",
+        "image": "",
+        "name": "Mago Elétrico"
+      },
+      {
+        "color": "rgb(150, 0, 150)",
+        "hint": "Invoca esqueletos",
+        "image": "",
+        "name": "Bruxa"
+      },
+      {
+        "color": "rgb(80, 0, 120)",
+        "hint": "Invoca morcegos",
+        "image": "",
+        "name": "Bruxa Sombria"
+      },
+      {
+        "color": "rgb(200, 120, 60)",
+        "hint": "Tanque aéreo, vira lava pups",
+        "image": "",
+        "name": "Lava Hound"
+      },
+      {
+        "color": "rgb(100, 100, 255)",
+        "hint": "Foca construções, bomba pesada",
+        "image": "",
+        "name": "Balão"
+      },
+      {
+        "color": "rgb(255, 100, 0)",
+        "hint": "Dano crescente",
+        "image": "",
+        "name": "Dragão Infernal"
+      },
+      {
+        "color": "rgb(50, 100, 200)",
+        "hint": "Barato e aéreo",
+        "image": "",
+        "name": "Mega Servo"
+      },
+      {
+        "color": "rgb(80, 80, 200)",
+        "hint": "Trio aéreo barato",
+        "image": "",
+        "name": "Servos"
+      },
+      {
+        "color": "rgb(120, 120, 255)",
+        "hint": "6 servos",
+        "image": "",
+        "name": "Horda de Servos"
+      },
+      {
+        "color": "rgb(0, 255, 0)",
+        "hint": "Trio rápido",
+        "image": "",
+        "name": "Goblin"
+      },
+      {
+        "color": "rgb(50, 200, 50)",
+        "hint": "Trio à distância",
+        "image": "",
+        "name": "Goblins Lanceiros"
+      },
+      {
+        "color": "rgb(80, 255, 120)",
+        "hint": "5 goblins",
+        "image": "",
+        "name": "Gangue de Goblins"
+      },
+      {
+        "color": "rgb(150, 200, 255)",
+        "hint": "Barato, explode congelando",
+        "image": "",
+        "name": "Golem de Gelo"
+      },
+      {
+        "color": "rgb(200, 0, 255)",
+        "hint": "Vira elixir pro inimigo",
+        "image": "",
+        "name": "Golem de Elixir"
+      },
+      {
+        "color": "rgb(250, 200, 0)",
+        "hint": "4 brutos",
+        "image": "",
+        "name": "Bárbaros"
+      },
+      {
+        "color": "rgb(255, 100, 50)",
+        "hint": "2 corredores brutais",
+        "image": "",
+        "name": "Bárbaros de Elite"
+      },
+      {
+        "color": "rgb(200, 80, 80)",
+        "hint": "Raivoso, deixa fúria",
+        "image": "",
+        "name": "Lenhador"
+      },
+      {
+        "color": "rgb(255, 200, 255)",
+        "hint": "Cura enquanto bate",
+        "image": "",
+        "name": "Curadora Guerreira"
+      },
+      {
+        "color": "rgb(200, 200, 255)",
+        "hint": "Fica invisível",
+        "image": "",
+        "name": "Fantasma Real"
+      },
+      {
+        "color": "rgb(200, 150, 150)",
+        "hint": "Tiro espalhado",
+        "image": "",
+        "name": "Caçador"
+      },
+      {
+        "color": "rgb(150, 255, 150)",
+        "hint": "Flecha atravessa tudo",
+        "image": "",
+        "name": "Arqueiro Mágico"
+      },
+      {
+        "color": "rgb(100, 150, 200)",
+        "hint": "Puxa com gancho",
+        "image": "",
+        "name": "Pescador"
+      },
+      {
+        "color": "rgb(255, 220, 100)",
+        "hint": "Dash insano",
+        "image": "",
+        "name": "Cavaleiro Dourado"
+      },
+      {
+        "color": "rgb(255, 180, 80)",
+        "hint": "Modo invisível",
+        "image": "",
+        "name": "Rainha Arqueira"
+      },
+      {
+        "color": "rgb(180, 150, 80)",
+        "hint": "Escudo, lança carregada",
+        "image": "",
+        "name": "Campeão Real"
+      },
+      {
+        "color": "rgb(220, 220, 220)",
+        "hint": "3 esqueletinhos",
+        "image": "",
+        "name": "Esqueletos"
+      },
+      {
+        "color": "rgb(80, 0, 80)",
+        "hint": "5 morcegos",
+        "image": "",
+        "name": "Morcegos"
+      },
+      {
+        "color": "rgb(255, 255, 100)",
+        "hint": "Reflete dano",
+        "image": "",
+        "name": "Gigante Elétrico"
+      },
+      {
+        "color": "rgb(200, 200, 150)",
+        "hint": "6 tropas",
+        "image": "",
+        "name": "Recrutas Reais"
+      },
+      {
+        "color": "rgb(255, 180, 150)",
+        "hint": "4 porquinhos",
+        "image": "",
+        "name": "Porcos Reais"
+      },
+      {
+        "color": "rgb(200, 150, 80)",
+        "hint": "Aéreo com alcance alto",
+        "image": "",
+        "name": "Máquina Voadora"
+      },
+      {
+        "color": "rgb(120, 100, 80)",
+        "hint": "Vira canhão ao quebrar",
+        "image": "",
+        "name": "Carrinho de Canhão"
+      },
+      {
+        "color": "rgb(0, 200, 120)",
+        "hint": "Carrega um goblin na mochila",
+        "image": "",
+        "name": "Goblins Gigantes"
+      },
+      {
+        "color": "rgb(200, 150, 200)",
+        "hint": "Aríete humano",
+        "image": "",
+        "name": "Domadora de Carneiros"
+      },
+      {
+        "color": "rgb(150, 150, 100)",
+        "hint": "Habilidade de ressurgir esqueletos",
+        "image": "",
+        "name": "Rei Esqueleto"
+      },
+      {
+        "color": "rgb(255, 235, 150)",
+        "hint": "Reflete projéteis",
+        "image": "",
+        "name": "Monge"
+      },
+      {
+        "color": "rgb(255, 150, 60)",
+        "hint": "Revive em ovo",
+        "image": "",
+        "name": "Fênix"
+      },
+      {
+        "color": "rgb(100, 60, 20)",
+        "hint": "Empurra e limpa",
+        "image": "",
+        "name": "O Tronco"
+      },
+      {
+        "color": "rgb(255, 80, 0)",
+        "hint": "Explosão média",
+        "image": "",
+        "name": "Bola de Fogo"
+      },
+      {
+        "color": "rgb(200, 200, 255)",
+        "hint": "Atordoa",
+        "image": "",
+        "name": "Zap"
+      },
+      {
+        "color": "rgb(255, 255, 150)",
+        "hint": "3 raios",
+        "image": "",
+        "name": "Relâmpago"
+      },
+      {
+        "color": "rgb(255, 200, 150)",
+        "hint": "Área larga",
+        "image": "",
+        "name": "Flechas"
+      },
+      {
+        "color": "rgb(120, 120, 150)",
+        "hint": "Puxa tudo",
+        "image": "",
+        "name": "Tornado"
+      },
+      {
+        "color": "rgb(150, 200, 255)",
+        "hint": "Congela tropas",
+        "image": "",
+        "name": "Gelo"
+      },
+      {
+        "color": "rgb(255, 50, 150)",
+        "hint": "Acelera tudo",
+        "image": "",
+        "name": "Fúria"
+      },
+      {
+        "color": "rgb(150, 255, 150)",
+        "hint": "Área contínua",
+        "image": "",
+        "name": "Veneno"
+      },
+      {
+        "color": "rgb(200, 180, 120)",
+        "hint": "Detona construções",
+        "image": "",
+        "name": "Terremoto"
+      },
+      {
+        "color": "rgb(200, 150, 255)",
+        "hint": "Duplica",
+        "image": "",
+        "name": "Clone"
+      },
+      {
+        "color": "rgb(150, 80, 255)",
+        "hint": "Buff temporário",
+        "image": "",
+        "name": "Pico de Elixir"
+      },
+      {
+        "color": "rgb(200, 150, 80)",
+        "hint": "Barril que vira bárbaro",
+        "image": "",
+        "name": "Barbaril"
+      },
+      {
+        "color": "rgb(255, 100, 0)",
+        "hint": "Dano alto em área",
+        "image": "",
+        "name": "Foguete"
+      },
+      {
+        "color": "rgb(255, 120, 0)",
+        "hint": "Dano crescente",
+        "image": "",
+        "name": "Torre Inferno"
+      },
+      {
+        "color": "rgb(200, 200, 100)",
+        "hint": "Bomba ao morrer",
+        "image": "",
+        "name": "Torre de Bombas"
+      },
+      {
+        "color": "rgb(120, 120, 120)",
+        "hint": "Barato, terra",
+        "image": "",
+        "name": "Canhão"
+      },
+      {
+        "color": "rgb(150, 150, 80)",
+        "hint": "Alcance absurdo",
+        "image": "",
+        "name": "X-Besta"
+      },
+      {
+        "color": "rgb(255, 100, 50)",
+        "hint": "Cospe espíritos de fogo",
+        "image": "",
+        "name": "Fornos"
+      },
+      {
+        "color": "rgb(200, 150, 80)",
+        "hint": "Gera bárbaros",
+        "image": "",
+        "name": "Barraca de Bárbaros"
+      },
+      {
+        "color": "rgb(100, 200, 100)",
+        "hint": "Gera goblins",
+        "image": "",
+        "name": "Cabana de Goblins"
+      },
+      {
+        "color": "rgb(180, 180, 180)",
+        "hint": "Gera esqueletos",
+        "image": "",
+        "name": "Lápide"
+      },
+      {
+        "color": "rgb(255, 0, 255)",
+        "hint": "Gera elixir",
+        "image": "",
+        "name": "Coletor de Elixir"
+      },
+      {
+        "color": "rgb(150, 100, 60)",
+        "hint": "Não é bem construção, mas conta",
+        "image": "",
+        "name": "Aríete de Batalha"
+      },
+      {
+        "color": "rgb(255, 100, 60)",
+        "hint": "Cria espíritos",
+        "image": "",
+        "name": "Horno"
+      }
+    ]
+  },
+  "scores": {
+    "clash_royale_impostor": {
+      "ugwromJKmKV417kUrtJhGsRAoNN2": {
+        "name": "ianrtaniguchi",
+        "score": 0
+      }
+    },
+    "cookie_clicker_game": {
+      "3s8wRtCqQJdkii1p937MyGI8GQ83": {
+        "name": "zejuma",
+        "score": 676767
+      },
+      "9k59ZBifEJZFqVtf0zcWLMkD64K2": {
+        "name": "jeduardox",
+        "score": 35
+      },
+      "FyW9mYVYFUaQKptyT09Hw5J80353": {
+        "name": "Pupypsolon",
+        "score": 696969
+      },
+      "t2WUgbZwpDetEBUAuavXj2E8GxJ3": {
+        "name": "teste",
+        "score": 105
+      },
+      "ugwromJKmKV417kUrtJhGsRAoNN2": {
+        "name": "Yakut_",
+        "score": 999999
+      }
+    },
+    "doisK_game": {
+      "3s8wRtCqQJdkii1p937MyGI8GQ83": {
+        "name": "zejuma",
+        "score": 676767
+      },
+      "9k59ZBifEJZFqVtf0zcWLMkD64K2": {
+        "name": "jeduardox",
+        "score": 1180
+      },
+      "FyW9mYVYFUaQKptyT09Hw5J80353": {
+        "name": "Pupypsolon",
+        "score": 696969
+      },
+      "t2WUgbZwpDetEBUAuavXj2E8GxJ3": {
+        "name": "teste",
+        "score": 844
+      },
+      "ugwromJKmKV417kUrtJhGsRAoNN2": {
+        "name": "Yakut_",
+        "score": 999999
+      }
+    },
+    "evade_game": {
+      "3s8wRtCqQJdkii1p937MyGI8GQ83": {
+        "name": "zejuma",
+        "score": 676767
+      },
+      "9k59ZBifEJZFqVtf0zcWLMkD64K2": {
+        "name": "jeduardox",
+        "score": 666
+      },
+      "FyW9mYVYFUaQKptyT09Hw5J80353": {
+        "name": "Pupypsolon",
+        "score": 696969
+      },
+      "t2WUgbZwpDetEBUAuavXj2E8GxJ3": {
+        "name": "teste",
+        "score": 380
+      },
+      "ugwromJKmKV417kUrtJhGsRAoNN2": {
+        "name": "Yakut_",
+        "score": 999999
+      }
+    },
+    "flappy_bird_game": {
+      "3s8wRtCqQJdkii1p937MyGI8GQ83": {
+        "name": "zejuma",
+        "score": 676767
+      },
+      "FyW9mYVYFUaQKptyT09Hw5J80353": {
+        "name": "Pupypsolon",
+        "score": 696969
+      },
+      "ugwromJKmKV417kUrtJhGsRAoNN2": {
+        "name": "Yakut_",
+        "score": 999999
+      }
+    },
+    "memory_game": {
+      "3s8wRtCqQJdkii1p937MyGI8GQ83": {
+        "name": "zejuma",
+        "score": 676767
+      },
+      "9k59ZBifEJZFqVtf0zcWLMkD64K2": {
+        "name": "jeduardox",
+        "score": 0
+      },
+      "FyW9mYVYFUaQKptyT09Hw5J80353": {
+        "name": "Pupypsolon",
+        "score": 696969
+      },
+      "t2WUgbZwpDetEBUAuavXj2E8GxJ3": {
+        "name": "teste",
+        "score": 97945
+      },
+      "ugwromJKmKV417kUrtJhGsRAoNN2": {
+        "name": "Yakut_",
+        "score": 999999
+      }
+    },
+    "pacman_game": {
+      "3s8wRtCqQJdkii1p937MyGI8GQ83": {
+        "name": "zejuma",
+        "score": 676767
+      },
+      "9k59ZBifEJZFqVtf0zcWLMkD64K2": {
+        "name": "jeduardox",
+        "score": 520
+      },
+      "FyW9mYVYFUaQKptyT09Hw5J80353": {
+        "name": "Pupypsolon",
+        "score": 696969
+      },
+      "O3UAshklOGYDgDCQDtW0im5x7r03": {
+        "name": "taniguchi",
+        "score": 100
+      },
+      "t2WUgbZwpDetEBUAuavXj2E8GxJ3": {
+        "name": "teste",
+        "score": 860
+      },
+      "ugwromJKmKV417kUrtJhGsRAoNN2": {
+        "name": "Yakut_",
+        "score": 999999
+      }
+    },
+    "quiz_game": {
+      "3s8wRtCqQJdkii1p937MyGI8GQ83": {
+        "name": "zejuma",
+        "score": 676767
+      },
+      "9k59ZBifEJZFqVtf0zcWLMkD64K2": {
+        "name": "jeduardox",
+        "score": 0
+      },
+      "FyW9mYVYFUaQKptyT09Hw5J80353": {
+        "name": "Pupypsolon",
+        "score": 696969
+      },
+      "t2WUgbZwpDetEBUAuavXj2E8GxJ3": {
+        "name": "teste",
+        "score": 1400
+      },
+      "ugwromJKmKV417kUrtJhGsRAoNN2": {
+        "name": "Yakut_",
+        "score": 999999
+      }
+    },
+    "snake_game": {
+      "3s8wRtCqQJdkii1p937MyGI8GQ83": {
+        "name": "zejuma",
+        "score": 676767
+      },
+      "FyW9mYVYFUaQKptyT09Hw5J80353": {
+        "name": "Pupypsolon",
+        "score": 696969
+      },
+      "ugwromJKmKV417kUrtJhGsRAoNN2": {
+        "name": "Yakut_",
+        "score": 999999
+      }
+    },
+    "space_invaders_game": {
+      "3s8wRtCqQJdkii1p937MyGI8GQ83": {
+        "name": "zejuma",
+        "score": 676767
+      },
+      "FyW9mYVYFUaQKptyT09Hw5J80353": {
+        "name": "Pupypsolon",
+        "score": 696969
+      },
+      "ugwromJKmKV417kUrtJhGsRAoNN2": {
+        "name": "Yakut_",
+        "score": 999999
+      }
+    },
+    "tower_defense_game": {
+      "3s8wRtCqQJdkii1p937MyGI8GQ83": {
+        "name": "zejuma",
+        "score": 676767
+      },
+      "9k59ZBifEJZFqVtf0zcWLMkD64K2": {
+        "name": "jeduardox",
+        "score": 300
+      },
+      "FyW9mYVYFUaQKptyT09Hw5J80353": {
+        "name": "Pupypsolon",
+        "score": 696969
+      },
+      "t2WUgbZwpDetEBUAuavXj2E8GxJ3": {
+        "name": "teste",
+        "score": 100000
+      },
+      "ugwromJKmKV417kUrtJhGsRAoNN2": {
+        "name": "Yakut_",
+        "score": 999999
+      }
+    }
+  }
+}
