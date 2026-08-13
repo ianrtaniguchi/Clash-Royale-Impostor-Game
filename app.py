@@ -69,7 +69,7 @@ elif st.session_state.etapa == "sorteio":
     
     if idx < len(jogadores):
         jogador_atual = jogadores[idx]
-        st.info"(Passe o celular/computador para: **{jogador_atual}**")
+        st.infof"(Passe o celular/computador para: **{jogador_atual}**")
         
         # Usamos um checkbox ou botão de confirmação para revelar
         ver_carta = st.checkbox("Marque aqui apenas quando for a sua vez de ver a carta", key=f"chk_{idx}")
