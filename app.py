@@ -3,22 +3,17 @@ import firebase_admin
 from firebase_admin import credentials, db
 import streamlit as st
 
-# Inicializar o Firebase usando st.secrets
 if not firebase_admin._apps:
-    # 1. Puxa os dados dos segredos e converte para dicionário
     firebase_config = dict(st.secrets["firebase"])
+    # Converte os caracteres '\n' escritos na string em quebras de linha reais
+    firebase_config["private_key"] = firebase_config["private_key"].encode().decode("unicode_escape")
 
-    # 2. CORREÇÃO CRÍTICA: Garante que as quebras de linha da chave privada sejam reais
-    firebase_config["private_key"] = firebase_config["private_key"].replace("\\n", "\n")
-
-    # 3. Inicializa o certificado com o dicionário corrigido
     cred = credentials.Certificate(firebase_config)
     firebase_admin.initialize_app(
         cred,
-        {"databaseURL": "https://impostor-multiplayer-1f7f7-default-rtdb.firebaseio.com/"},
+        {"databaseURL": ("https://impostor-multiplayer-1f7f7-default-rtdb.firebaseio.com/")},
     )
 
-# Referência global para a sala no Realtime Database
 ref = db.reference("sala_jogo")
 
 # Dicionário completo com várias categorias contendo muitos itens
