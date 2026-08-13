@@ -1,25 +1,34 @@
 import random
+import json
+import tempfile
+import os
 import firebase_admin
 from firebase_admin import credentials, db
 import streamlit as st
 
-# Inicializar o Firebase usando st.secrets limpo
+# Inicializar o Firebase usando st.secrets com arquivo temporário
 if not firebase_admin._apps:
-    # Transforma os segredos em um dicionário Python normal
+    # 1. Puxa os dados dos segredos
     firebase_config = dict(st.secrets["firebase"])
 
-    # Prevenção: caso o Streamlit entregue algum \n como texto, ele arruma,
-    # se já vier formatado certo do TOML ''', ele não estraga nada.
-    if "\\n" in firebase_config["private_key"]:
-        firebase_config["private_key"] = firebase_config["private_key"].replace("\\n", "\n")
+    # 2. Garante que a chave esteja perfeitamente formatada (remove quebras extras no inicio/fim)
+    firebase_config["private_key"] = firebase_config["private_key"].replace("\\n", "\n").strip()
 
-    # Passa o dicionário diretamente para o certificado
-    cred = credentials.Certificate(firebase_config)
+    # 3. Cria um arquivo JSON temporário para o Firebase ler (Isso evita todos os bugs de formato)
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as temp_file:
+        json.dump(firebase_config, temp_file)
+        temp_file_path = temp_file.name
 
-    firebase_admin.initialize_app(
-        cred,
-        {"databaseURL": "https://impostor-multiplayer-1f7f7-default-rtdb.firebaseio.com/"},
-    )
+    try:
+        # 4. Inicializa o Firebase passando o caminho do arquivo físico temporário
+        cred = credentials.Certificate(temp_file_path)
+        firebase_admin.initialize_app(
+            cred,
+            {"databaseURL": "https://impostor-multiplayer-1f7f7-default-rtdb.firebaseio.com/"},
+        )
+    finally:
+        # 5. Apaga o arquivo temporário imediatamente por segurança
+        os.remove(temp_file_path)
 
 # Referência global para a sala no Realtime Database
 ref = db.reference("sala_jogo")
