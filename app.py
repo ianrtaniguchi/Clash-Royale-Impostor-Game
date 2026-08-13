@@ -3,14 +3,16 @@ import firebase_admin
 from firebase_admin import credentials, db
 import streamlit as st
 
-# Inicializar o Firebase usando um dicionário Python (seguro para o GitHub)
+# Inicializar o Firebase usando um dicionário Python tratado com segurança
 if not firebase_admin._apps:
     firebase_config = {
         "type": "service_account",
         "project_id": "impostor-multiplayer-1f7f7",
         "private_key_id": "5b155b72e3149345bff95436507a52f9fb2db76b",
         "private_key": (
-            "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDBjhBlfdiQF9i/\nOcswIo4uL+DqSSgLRR/aHFe+wyn4XVhnVFhq4wZiS0c9GNl5/UcPbXnjIQYQj71U\nnHGH/uHrLwKWOwYw82Zfmx7K6Z5fFwc7gLm/cYCzV/bh/wT7XWboFAErZ/cgCCR+\n4S3vWe9itqcm7RG9IH84YFWtZ7UoY3pQGgxDzz2C4xy4ellk15O2Mt0dF/GI3mMG\nWnSoIpkV3LZSIVTTLm7aD1r3sGY3qjsbuezOXvQJpHRXPBzfr3iop7G56afk7Pk4\nIhWF0AHIcJCn+AkXR6P2eXonPhaBeSRfciln24GR0JyEUl71GD/++2pZcZluNBXp\nJpAH93ilAgMBAAECggEADYR/bqcgVcfkkk5V+3GeXmlnmtUrH8ZfGBt8oUz+BGN4\nhhbk6eobCwhY3FJ89cETkmdB6PPoeYWgYmVepHHPk15AHv/WSdrl3m119BPmxJtW\nHPi7gDxMEbpl+piV33xBcJndDwv+vVT0P4w4agvs5Qb+m4BZCc1YNTa9JRQmGcDh\ndJ8s8owdAyZOa+eCytLlcqfhUYfWOY1N7bEwevqP5NTL4XOH70iGYLHI3uS+FTiV\no8ZaIz/r/XQuXMdhGMHZphxcci2gh1v+4jA4BiRua4B6UOLLw9JyS7arTY0/+MAB\np5PJO8hXmAVFqy0W8i0cdPq3/gGeQonYXI6u2K5ZTQKBgQD82AAEnEsvvCz2B/BF\nA+WMomSqJGnyZd7FGlWKgA0XI3TP3SmGBbCuknWd0bHkTM7N8dR1qSJTj9pnmFdL\ANh/1CKZjUjcDQ+yyEw9Xbi5i9e49Y1DWzEsqmZTpYjeX6U27WK1iqkkEZZN2aZa\ndlAC8RSLH8WiYaheqAAS0l4PewKBgQDD+JkE7d/rI8Onmcdl2kdrnKb+CXNWewFv\njf2+6XAf0gnlGcatlu6VpbmIT5K6aR0nc9a0TRzmbOpVLf0oOLmkGHn9IQvPbHIm\n79uJm600N4NRqfcRp9Qfz5KP7QKZgmxgBGjJS8w2cK+rbrn+YkD1vHSMhHlxlj56\nxQj9jXUOXwKBgQDm+vRZQea1vvRb9jia88paRWgsvoNC+6kc6sfGdOCAiNWHpwTt\+HjFoepsuEoIw9oQ7aEns9E2AS6GgPcN/8HIVSUenaE31X7H1o8/aET+zC/QOhJI\nvCAaK7i7JXf5neqyWP5Z1khaOO7UQ8bi0T6a0V3xEp9bjldf0Z3vk9p1zQKBgQCn\nM7f7CKoACaepm/8Q28gL/MBOBuotYw26jD9vX+SWgbKHkhJ9kUVG0PsXXi0mdwC0\5JTPiOubfloBCxfv9VYOuAN9AXD+LNzIc+Wv5u9Emgik6IswuSy3Z3b47ZNGPo0Q\7zIobU9zM3nunq56aIJcJ8qZCX5Ed5gfT3V4P/UbqQKBgDT4fHHvYqvX/Jgoqwa2\nIwrDSGJHVbljIZuH6OycY8JWDFcw3UTfpaN/oV4ILLf+QVTPSyS8Cvt6K43kdN7Q\nAqPeIEi6vulpXjkfXnWubzVH2F1QwrUhV2ZZpDpQ1e5L9ldRG4rXlyqeW0ioUYne\nQSnCny9j0rRkERpnW612ZKkH\n-----END PRIVATE KEY-----\n"
+            "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDBjhBlfdiQF9i/\nOcswIo4uL+DqSSgLRR/aHFe+wyn4XVhnVFhq4wZiS0c9GNl5/UcPbXnjIQYQj71U\nnHGH/uHrLwKWOwYw82Zfmx7K6Z5fFwc7gLm/cYCzV/bh/wT7XWboFAErZ/cgCCR+\n4S3vWe9itqcm7RG9IH84YFWtZ7UoY3pQGgxDzz2C4xy4ellk15O2Mt0dF/GI3mMG\nWnSoIpkV3LZSIVTTLm7aD1r3sGY3qjsbuezOXvQJpHRXPBzfr3iop7G56afk7Pk4\nIhWF0AHIcJCn+AkXR6P2eXonPhaBeSRfciln24GR0JyEUl71GD/++2pZcZluNBXp\nJpAH93ilAgMBAAECggEADYR/bqcgVcfkkk5V+3GeXmlnmtUrH8ZfGBt8oUz+BGN4\nhhbk6eobCwhY3FJ89cETkmdB6PPoeYWgYmVepHHPk15AHv/WSdrl3m119BPmxJtW\nHPi7gDxMEbpl+piV33xBcJndDwv+vVT0P4w4agvs5Qb+m4BZCc1YNTa9JRQmGcDh\ndJ8s8owdAyZOa+eCytLlcqfhUYfWOY1N7bEwevqP5NTL4XOH70iGYLHI3uS+FTiV\no8ZaIz/r/XQuXMdhGMHZphxcci2gh1v+4jA4BiRua4B6UOLLw9JyS7arTY0/+MAB\np5PJO8hXmAVFqy0W8i0cdPq3/gGeQonYXI6u2K5ZTQKBgQD82AAEnEsvvCz2B/BF\nA+WMomSqJGnyZd7FGlWKgA0XI3TP3SmGBbCuknWd0bHkTM7N8dR1qSJTj9pnmFdL\ANh/1CKZjUjcDQ+yyEw9Xbi5i9e49Y1DWzEsqmZTpYjeX6U27WK1iqkkEZZN2aZa\ndlAC8RSLH8WiYaheqAAS0l4PewKBgQDD+JkE7d/rI8Onmcdl2kdrnKb+CXNWewFv\njf2+6XAf0gnlGcatlu6VpbmIT5K6aR0nc9a0TRzmbOpVLf0oOLmkGHn9IQvPbHIm\n79uJm600N4NRqfcRp9Qfz5KP7QKZgmxgBGjJS8w2cK+rbrn+YkD1vHSMhHlxlj56\nxQj9jXUOXwKBgQDm+vRZQea1vvRb9jia88paRWgsvoNC+6kc6sfGdOCAiNWHpwTt\+HjFoepsuEoIw9oQ7aEns9E2AS6GgPcN/8HIVSUenaE31X7H1o8/aET+zC/QOhJI\nvCAaK7i7JXf5neqyWP5Z1khaOO7UQ8bi0T6a0V3xEp9bjldf0Z3vk9p1zQKBgQCn\nM7f7CKoACaepm/8Q28gL/MBOBuotYw26jD9vX+SWgbKHkhJ9kUVG0PsXXi0mdwC0\5JTPiOubfloBCxfv9VYOuAN9AXD+LNzIc+Wv5u9Emgik6IswuSy3Z3b47ZNGPo0Q\7zIobU9zM3nunq56aIJcJ8qZCX5Ed5gfT3V4P/UbqQKBgDT4fHHvYqvX/Jgoqwa2\nIwrDSGJHVbljIZuH6OycY8JWDFcw3UTfpaN/oV4ILLf+QVTPSyS8Cvt6K43kdN7Q\nAqPeIEi6vulpXjkfXnWubzVH2F1QwrUhV2ZZpDpQ1e5L9ldRG4rXlyqeW0ioUYne\QSnCny9j0rRkERpnW612ZKkH\n-----END PRIVATE KEY-----".replace(
+                "\\n", "\n"
+            )
         ),
         "client_email": ("firebase-adminsdk-fbsvc@impostor-multiplayer-1f7f7.iam.gserviceaccount.com"),
         "client_id": "115787026756872995232",
@@ -27,7 +29,6 @@ if not firebase_admin._apps:
         {"databaseURL": ("https://impostor-multiplayer-1f7f7-default-rtdb.firebaseio.com/")},
     )
 
-# Referência global para a sala no Realtime Database
 ref = db.reference("sala_jogo")
 
 # Dicionário completo com várias categorias contendo muitos itens
