@@ -1,5 +1,18 @@
 import random
+import firebase_admin
+from firebase_admin import credentials, db
 import streamlit as st
+
+# Inicializar o Firebase apenas uma vez
+if not firebase_admin._apps:
+    cred = credentials.Certificate("impostor-multiplayer-1f7f7-firebase-adminsdk-fbsvc-5b155b72e3.json")
+    firebase_admin.initialize_app(
+        cred,
+        {"databaseURL": ("https://impostor-multiplayer-1f7f7-default-rtdb.firebaseio.com/")},
+    )
+
+# Referência global para a sala no Realtime Database
+ref = db.reference("sala_jogo")
 
 # Dicionário completo com várias categorias contendo muitos itens
 categorias = {
@@ -259,21 +272,46 @@ categorias = {
     ],
 }
 
-st.title("🕵️‍♂️ Jogo do Impostor - Web")
+st.title("🕵️‍♂️ Jogo do Impostor - Multiplayer Firebase")
+
+# Sincronizar estado inicial com o Firebase se existir
+dados_remotos = ref.get()
 
 # Inicializar o estado da sessão do Streamlit
 if "etapa" not in st.session_state:
-    st.session_state.etapa = "menu"
-if "jogadores" not in st.session_state:
-    st.session_state.jogadores = []
-if "indice_atual" not in st.session_state:
-    st.session_state.indice_atual = 0
-if "carta_secreta" not in st.session_state:
-    st.session_state.carta_secreta = ""
-if "impostor" not in st.session_state:
-    st.session_state.impostor = ""
-if "categoria_escolhida" not in st.session_state:
-    st.session_state.categoria_escolhida = "Clash Royale"
+    if dados_remotos and "etapa" in dados_remotos:
+        st.session_state.etapa = dados_remotos["etapa"]
+        st.session_state.jogadores = dados_remotos.get("jogadores", [])
+        st.session_state.indice_atual = dados_remotos.get("indice_atual", 0)
+        st.session_state.carta_secreta = dados_remotos.get("carta_secreta", "")
+        st.session_state.impostor = dados_remotos.get("impostor", "")
+        st.session_state.categoria_escolhida = dados_remotos.get("categoria_escolhida", "Clash Royale")
+    else:
+        st.session_state.etapa = "menu"
+        st.session_state.jogadores = []
+        st.session_state.indice_atual = 0
+        st.session_state.carta_secreta = ""
+        st.session_state.impostor = ""
+        st.session_state.categoria_escolhida = "Clash Royale"
+
+
+def atualizar_firebase():
+    """Salva o estado atual no Firebase para sincronizar com os outros jogadores"""
+    ref.set(
+        {
+            "etapa": st.session_state.etapa,
+            "jogadores": st.session_state.jogadores,
+            "indice_atual": st.session_state.indice_atual,
+            "carta_secreta": st.session_state.carta_secreta,
+            "impostor": st.session_state.impostor,
+            "categoria_escolhida": st.session_state.categoria_escolhida,
+        }
+    )
+
+
+# Botão para buscar atualizações manuais do servidor
+if st.button("🔄 Sincronizar / Atualizar Tela"):
+    st.rerun()
 
 # ETAPA 0: Menu de Seleção de Categoria
 if st.session_state.etapa == "menu":
@@ -283,6 +321,7 @@ if st.session_state.etapa == "menu":
     if st.button("Avançar para Configuração"):
         st.session_state.categoria_escolhida = categoria_selecionada
         st.session_state.etapa = "config"
+        atualizar_firebase()
         st.rerun()
 
 # ETAPA 1: Configuração dos Jogadores
@@ -291,6 +330,7 @@ elif st.session_state.etapa == "config":
 
     if st.button("⬅️ Voltar e trocar de categoria"):
         st.session_state.etapa = "menu"
+        atualizar_firebase()
         st.rerun()
 
     num_jogadores = st.number_input("Número de jogadores (mínimo 3):", min_value=3, max_value=20, value=3)
@@ -301,7 +341,6 @@ elif st.session_state.etapa == "config":
         nomes.append(nome)
 
     if st.button("Iniciar Jogo"):
-        # Validar se os nomes foram preenchidos
         nomes_validos = [n.strip() for n in nomes if n.strip()]
         if len(nomes_validos) < 3:
             st.error("Você precisa digitar o nome de pelo menos 3 jogadores!")
@@ -310,10 +349,11 @@ elif st.session_state.etapa == "config":
             st.session_state.etapa = "sorteio"
             st.session_state.indice_atual = 0
 
-            # Sorteia baseado na categoria escolhida
             lista_ativa = categorias[st.session_state.categoria_escolhida]
             st.session_state.carta_secreta = random.choice(lista_ativa)
             st.session_state.impostor = random.choice(nomes_validos)
+
+            atualizar_firebase()
             st.rerun()
 
 # ETAPA 2: Revelação secreta para cada jogador
@@ -325,25 +365,26 @@ elif st.session_state.etapa == "sorteio":
         jogador_atual = jogadores[idx]
         st.info(f"Passe o celular/computador para: **{jogador_atual}**")
 
-        # Usamos um checkbox para revelar a carta com segurança
         ver_carta = st.checkbox("Marque aqui apenas quando for a sua vez de ver a carta", key=f"chk_{idx}")
 
         if ver_carta:
             if jogador_atual == st.session_state.impostor:
                 st.error("🚨 Você é o IMPOSTOR! Tente disfarçar.")
             else:
-                st.success(f"📂 Categoria: **{st.session_state.categoria_escolhida}**\n\n⚔️ Sua palavra secreta é: **{st.session_state.carta_secreta}**")
+                st.success(f"📂 Categoria: **{st.session_state.categoria_escolhida}**\n\n⚔️" f" Sua palavra secreta é: **{st.session_state.carta_secreta}**")
 
         if st.button("Próximo Jogador / Esconder"):
             st.session_state.indice_atual += 1
+            atualizar_firebase()
             st.rerun()
     else:
         st.session_state.etapa = "fim_rodada"
+        atualizar_firebase()
         st.rerun()
 
 # ETAPA 3: Fim da rodada de revelação
 elif st.session_state.etapa == "fim_rodada":
-    st.success("🎉 Todos já viram suas cartas! Discutam entre si para descobrir quem é o impostor.")
+    st.success("🎉 Todos já viram suas cartas! Discutam entre si para descobrir quem é" f" o impostor. (O impostor era: **{st.session_state.impostor}**)")
 
     col1, col2 = st.columns(2)
     with col1:
@@ -353,8 +394,10 @@ elif st.session_state.etapa == "fim_rodada":
             lista_ativa = categorias[st.session_state.categoria_escolhida]
             st.session_state.carta_secreta = random.choice(lista_ativa)
             st.session_state.impostor = random.choice(st.session_state.jogadores)
+            atualizar_firebase()
             st.rerun()
     with col2:
         if st.button("Trocar Categoria / Reiniciar"):
             st.session_state.etapa = "menu"
+            atualizar_firebase()
             st.rerun()
